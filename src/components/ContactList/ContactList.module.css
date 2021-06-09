@@ -1,0 +1,21 @@
+.ContactList {
+  width: 300px;
+}
+
+.ContactListItem {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px 5px;
+  margin-bottom: 5px;
+  background-color: white;
+}
+
+.DeleteBtn {
+  height: 30px;
+  width: 70px;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}

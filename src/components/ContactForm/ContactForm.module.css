@@ -1,0 +1,14 @@
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+}
+
+.inputLabel {
+  display: inline-flex;
+  flex-direction: column;
+}
+.inputValue {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}

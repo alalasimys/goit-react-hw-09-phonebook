@@ -6,6 +6,9 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import Filter from "./components/Filter/Filter";
 
+//Styles
+import "./styles.css";
+
 class App extends Component {
   state = {
     contacts: [
@@ -57,7 +60,7 @@ class App extends Component {
     const currentContactList = this.getCurrentContacts();
 
     return (
-      <>
+      <div className="Phonebook">
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
@@ -67,7 +70,7 @@ class App extends Component {
           contacts={currentContactList}
           onDeleteContact={this.deleteContact}
         />
-      </>
+      </div>
     );
   }
 }
