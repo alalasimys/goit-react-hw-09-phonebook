@@ -1,1 +1,1 @@
-# React Homework#3 -- Phonebook
+# React Homework#6 -- Phonebook Redux
