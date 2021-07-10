@@ -32,6 +32,7 @@ class App extends Component {
   //     name,
   //     number,
   //   };
+  //TODO :
   //   this.state.contacts.some(
   //     (contact) => name.toLowerCase() === contact.name.toLowerCase()
   //   )

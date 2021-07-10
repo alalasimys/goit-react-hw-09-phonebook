@@ -1,5 +1,10 @@
 import { combineReducers } from "redux";
-import { ADD, DELETE, FILTER } from "./phonebook-types";
+import { createReducer } from "@reduxjs/toolkit";
+import {
+  addContact,
+  deleteContact,
+  changeFilter,
+} from "../phonebook/phonebook-actions";
 
 const initialContacts = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -8,27 +13,15 @@ const initialContacts = [
   { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 ];
 
-const contacts = (state = initialContacts, { type, payload }) => {
-  switch (type) {
-    case ADD:
-      return [...state, payload];
+const contacts = createReducer(initialContacts, {
+  [addContact]: (state, { payload }) => [...state, payload],
+  [deleteContact]: (state, { payload }) =>
+    state.filter((contact) => contact.id !== payload),
+});
 
-    case DELETE:
-      return state.filter((contact) => contact.id !== payload);
-
-    default:
-      return state;
-  }
-};
-const filter = (state = "", { type, payload }) => {
-  switch (type) {
-    case FILTER:
-      return payload;
-
-    default:
-      return state;
-  }
-};
+const filter = createReducer("", {
+  [changeFilter]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
   contacts,
