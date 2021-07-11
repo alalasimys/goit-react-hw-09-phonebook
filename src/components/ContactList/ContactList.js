@@ -32,7 +32,7 @@ const getCurrentContacts = (allContacts, filter) => {
   );
 };
 
-const mapStateToProps = ({ phonebook: { contacts, filter } }) => ({
+const mapStateToProps = ({ contacts, filter }) => ({
   contacts: getCurrentContacts(contacts, filter),
 });
 

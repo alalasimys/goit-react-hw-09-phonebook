@@ -16,7 +16,7 @@ const Filter = ({ value, onChange }) => (
 );
 
 const mapStateToProps = (state) => ({
-  value: state.phonebook.filter,
+  value: state.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
