@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteContact } from "../../redux/phonebook/phonebook-actions";
+import { deleteContact } from "../../redux/phonebook/phonebook-operations";
 import styles from "./ContactList.module.css";
 
 const ContactList = ({ contacts, onDeleteContact }) => {

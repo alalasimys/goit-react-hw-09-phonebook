@@ -1,1 +1,1 @@
-# React Homework#6 -- Phonebook Redux
+# React Homework#7 -- Phonebook Async Redux and Selectors
