@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./Filter.module.css";
-import { changeFilter } from "../../redux/phonebook/phonebook-actions";
+import { phonebookSelectors, changeFilter } from "../../redux/phonebook";
 
 const Filter = ({ value, onChange }) => (
   <label className={styles.inputLabel}>
@@ -16,7 +16,7 @@ const Filter = ({ value, onChange }) => (
 );
 
 const mapStateToProps = (state) => ({
-  value: state.filter,
+  value: phonebookSelectors.getFilter(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

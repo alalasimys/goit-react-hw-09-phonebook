@@ -2,10 +2,9 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
+import ContactList from "./components/ContactList";
 import Filter from "./components/Filter/Filter";
-import { fetchContacts } from "./redux/phonebook/phonebook-operations";
-
+import { fetchContacts, phonebookSelectors } from "./redux/phonebook";
 //Styles
 import "./styles.css";
 
@@ -29,7 +28,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loading,
+  isLoading: phonebookSelectors.getLoading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
