@@ -1,1 +1,1 @@
-# React Homework#7 -- Phonebook Async Redux and Selectors
+# React Homework#8 -- Token-Based Authentication

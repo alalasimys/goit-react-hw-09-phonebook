@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import phonebookReducer from "./phonebook/phonebook-reducer";
+import phonebookReducer from "./phonebook";
+import authReducer from "./auth";
 import {
   FLUSH,
   REHYDRATE,
@@ -7,18 +8,30 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  persistStore,
+  persistReducer,
 } from "redux-persist";
-import logger from "redux-logger";
+import storage from "redux-persist/lib/storage";
+// import logger from "redux-logger";
+
+const authPersistConfig = {
+  key: "token",
+  storage,
+  whitelist: ["token"],
+};
 
 export const store = configureStore({
-  reducer: phonebookReducer,
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    phonebook: phonebookReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(logger),
+    }),
   devTools: process.env.NODE_ENV === "development",
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
