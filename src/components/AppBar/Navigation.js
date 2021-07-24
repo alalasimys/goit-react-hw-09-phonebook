@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getIsAuthenticated } from "../../redux/auth";
 
@@ -37,7 +37,9 @@ const Navigation = ({ isAuthenticated }) => {
   );
 };
 
-// Navigation.propTypes = {};
+Navigation.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   isAuthenticated: getIsAuthenticated(state),

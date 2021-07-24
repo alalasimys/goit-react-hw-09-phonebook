@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { logIn } from "../../redux/auth";
 
 const styles = {
@@ -15,7 +15,10 @@ const styles = {
 };
 
 export class LoginView extends Component {
-  // static propTypes = {};
+  static propTypes = {
+    onLogin: PropTypes.func.isRequired,
+  };
+
   state = {
     email: "",
     password: "",

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import { register } from "../../redux/auth";
 
 const styles = {
@@ -15,7 +15,10 @@ const styles = {
 };
 
 export class RegisterView extends Component {
-  // static propTypes = {};
+  static propTypes = {
+    onRegister: PropTypes.func.isRequired,
+  };
+
   state = {
     name: "",
     email: "",

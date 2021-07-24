@@ -11,6 +11,7 @@ class ContactForm extends Component {
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    currentContacts: PropTypes.array.isRequired,
   };
 
   handleChange = (e) => {

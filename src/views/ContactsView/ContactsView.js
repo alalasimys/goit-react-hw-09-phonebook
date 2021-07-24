@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 //Components
 import ContactForm from "../../components/ContactForm";
 import Filter from "../../components/Filter";
@@ -8,7 +8,10 @@ import { connect } from "react-redux";
 import { fetchContacts, phonebookSelectors } from "../../redux/phonebook";
 
 export class ContactsView extends Component {
-  // static propTypes = {};
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    fetchContacts: PropTypes.func.isRequired,
+  };
   componentDidMount() {
     this.props.fetchContacts();
   }

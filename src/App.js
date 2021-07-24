@@ -6,9 +6,6 @@ import AppBar from "./components/AppBar";
 import PrivateRoute from "./components/RouteHelper/PrivateRoute";
 import PublicRoute from "./components/RouteHelper/PublicRoute";
 import { getCurrentUser } from "./redux/auth";
-//Styles
-
-import { Button } from "react-bootstrap";
 
 const HomeView = lazy(() =>
   import("./views/HomeView" /* webpackChunkName: "home-page" */)
@@ -31,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Button variant="primary">Primary</Button> <AppBar />
+        <AppBar />
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
             <Route exact path="/" component={HomeView} />
