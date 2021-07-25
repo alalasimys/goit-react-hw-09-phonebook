@@ -2,17 +2,19 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styles from "./Filter.module.css";
 import { phonebookSelectors, changeFilter } from "../../redux/phonebook";
+import Form from "react-bootstrap/Form";
 
 const Filter = ({ value, onChange }) => (
-  <label className={styles.inputLabel}>
-    Find contacts by name
-    <input
+  <Form.Group size="sm" className="mb-3">
+    {/* <Form.Label>Find contacts by name</Form.Label> */}
+    <Form.Control
+      placeholder="Find contacts by name"
       className={styles.inputValue}
       type="text"
       value={value}
       onChange={onChange}
-    ></input>
-  </label>
+    />
+  </Form.Group>
 );
 
 const mapStateToProps = (state) => ({

@@ -1,0 +1,29 @@
+.background-image {
+  position: relative;
+  background-image: url("../../images/phone.png");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+.HomeView__container {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: inherit;
+  height: 200px;
+  padding: 35px;
+  background-color: #c6538c;
+  color: white;
+  border-radius: 30px;
+}
+
+.HomeView__text {
+  font-family: "Assistant", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}

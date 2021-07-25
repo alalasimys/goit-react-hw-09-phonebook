@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import styles from "./ContactForm.module.css";
 import { connect } from "react-redux";
 import { addContact, phonebookSelectors } from "../../redux/phonebook";
+import Form from "react-bootstrap/Form";
+import "./ContactForm.scss";
+
 class ContactForm extends Component {
   state = {
     name: "",
@@ -38,22 +41,23 @@ class ContactForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className={styles.FormContainer}>
-        <label className={styles.inputLabel}>
-          Name
-          <input
+        <Form.Group size="sm" className="mb-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
             className={styles.inputValue}
             value={this.state.name}
             onChange={this.handleChange}
-            type="text"
+            placeholder="Enter name"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
           />
-        </label>
-        <label className={styles.inputLabel}>
-          Number
-          <input
+        </Form.Group>
+        <Form.Group size="sm" className="mb-3">
+          <Form.Label className={styles.inputLabel}>Number</Form.Label>
+          <Form.Control
             className={styles.inputValue}
             value={this.state.number}
             onChange={this.handleChange}
@@ -63,7 +67,7 @@ class ContactForm extends Component {
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required
           />
-        </label>
+        </Form.Group>
         <button type="submit">Add contact</button>
       </form>
     );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logIn } from "../../redux/auth";
+import "./LoginView.scss";
 
 const styles = {
   form: {
@@ -38,36 +39,38 @@ export class LoginView extends Component {
     const { email, password } = this.state;
 
     return (
-      <div>
-        <h1>Страница логина</h1>
+      <div className="LoginView background-image">
+        <div className="form-background">
+          <h2>Login</h2>
 
-        <form
-          onSubmit={this.handleSubmit}
-          style={styles.form}
-          autoComplete="off"
-        >
-          <label style={styles.label}>
-            Почта
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
+          <form
+            onSubmit={this.handleSubmit}
+            style={styles.form}
+            autoComplete="off"
+          >
+            <label style={styles.label}>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </label>
 
-          <label style={styles.label}>
-            Пароль
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-          </label>
+            <label style={styles.label}>
+              Password
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </label>
 
-          <button type="submit">Войти</button>
-        </form>
+            <button type="submit">Log in</button>
+          </form>
+        </div>
       </div>
     );
   }

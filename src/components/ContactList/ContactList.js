@@ -1,10 +1,11 @@
 import styles from "./ContactList.module.css";
+import ListGroup from "react-bootstrap/ListGroup";
 
 export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul className={styles.ContactList}>
+    <ListGroup>
       {contacts.map(({ id, name, number }) => (
-        <li className={styles.ContactListItem} key={id}>
+        <ListGroup.Item className={styles.ContactListItem} key={id}>
           <p>
             {name}: {number}
           </p>
@@ -15,8 +16,8 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
           >
             Delete
           </button>
-        </li>
+        </ListGroup.Item>
       ))}
-    </ul>
+    </ListGroup>
   );
 };
