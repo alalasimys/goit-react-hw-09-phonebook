@@ -1,5 +1,4 @@
 import styles from "./ContactList.module.css";
-import ListGroup from "react-bootstrap/ListGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact } from "../../redux/phonebook/phonebook-operations";
 import { phonebookSelectors } from "../../redux/phonebook";

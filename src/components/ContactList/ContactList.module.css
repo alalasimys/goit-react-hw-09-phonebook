@@ -1,5 +1,5 @@
 .ContactList {
-  width: 300px;
+  width: 330px;
 }
 
 .ContactListItem {
@@ -22,14 +22,18 @@
 
 .ContactListContactName {
   display: inline-block;
+  text-align: center;
   font-weight: 700;
   margin-right: 5px;
 }
 
 .ContactListContact {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   font-family: "Assistant", sans-serif;
   font-size: 18px;
   font-weight: 400;
   margin-bottom: 0;
-  text-align: center;
 }
