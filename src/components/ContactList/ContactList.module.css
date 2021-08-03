@@ -7,16 +7,29 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
-  padding: 10px 5px;
-  margin-bottom: 5px;
+  border-bottom: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 10px;
+  /* margin-bottom: 5px; */
   background-color: white;
 }
 
 .DeleteBtn {
   height: 30px;
   width: 70px;
-  margin-top: auto;
-  margin-bottom: auto;
-  cursor: pointer;
+  margin: 0;
+}
+
+.ContactListContactName {
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.ContactListContact {
+  font-family: "Assistant", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 0;
+  text-align: center;
 }

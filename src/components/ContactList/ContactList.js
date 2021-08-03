@@ -11,11 +11,12 @@ export default function ContactList() {
   const onDeleteContact = (id) => dispatch(deleteContact(id));
 
   return (
-    <ListGroup>
+    <ul className={styles.ContactList}>
       {contacts.map(({ id, name, number }) => (
-        <ListGroup.Item className={styles.ContactListItem} key={id}>
-          <p>
-            {name}: {number}
+        <li className={styles.ContactListItem} key={id}>
+          <p className={styles.ContactListContact}>
+            <span className={styles.ContactListContactName}>{name}:</span>{" "}
+            {number}
           </p>
           <button
             className={styles.DeleteBtn}
@@ -24,8 +25,8 @@ export default function ContactList() {
           >
             Delete
           </button>
-        </ListGroup.Item>
+        </li>
       ))}
-    </ListGroup>
+    </ul>
   );
 }

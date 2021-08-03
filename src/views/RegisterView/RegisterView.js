@@ -1,91 +1,97 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth";
 import "./RegisterView.scss";
+import Form from "react-bootstrap/Form";
 
 const styles = {
   form: {
     width: 320,
   },
-  label: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 15,
-  },
 };
 
-export class RegisterView extends Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
+export default function RegisterView() {
+  const [name, setName] = useState("");
+  const [email, setMail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const onRegister = useCallback(
+    (credentials) => dispatch(register(credentials)),
+    [dispatch]
+  );
+
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+
+      case "email":
+        setMail(value);
+        break;
+
+      case "password":
+        setPassword(value);
+        break;
+
+      default:
+        console.log(`Field with name -  ${name} not found`);
+    }
   };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onRegister(this.state);
-
-    this.setState({ name: "", email: "", password: "" });
+    onRegister({ name, email, password });
+    setName("");
+    setMail("");
+    setPassword("");
   };
 
-  render() {
-    const { name, email, password } = this.state;
+  return (
+    <div className="RegisterView background-image">
+      <div className="form-background">
+        <h2>Sign up</h2>
 
-    return (
-      <div className="RegisterView background-image">
-        <div className="form-background">
-          <h2>Sign up</h2>
+        <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
+          <Form.Group size="sm" className="mb-3">
+            {" "}
+            <Form.Label>Your name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-          <form
-            onSubmit={this.handleSubmit}
-            style={styles.form}
-            autoComplete="off"
-          >
-            <label style={styles.label}>
-              Your name
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={this.handleChange}
-              />
-            </label>
+          <Form.Group size="sm" className="mb-3">
+            {" "}
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-            <label style={styles.label}>
-              Email
-              <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={this.handleChange}
-              />
-            </label>
+          <Form.Group size="sm" className="mb-3">
+            {" "}
+            <Form.Label>Password </Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-            <label style={styles.label}>
-              Password
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <button type="submit">Sign up</button>
-          </form>
-        </div>
+          <button type="submit">Sign up</button>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-const mapDispatchToProps = {
-  onRegister: register,
-};
-
-export default connect(null, mapDispatchToProps)(RegisterView);

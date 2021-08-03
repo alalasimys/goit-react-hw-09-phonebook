@@ -3,15 +3,11 @@ import { useDispatch } from "react-redux";
 
 import { logIn } from "../../redux/auth";
 import "./LoginView.scss";
+import Form from "react-bootstrap/Form";
 
 const styles = {
   form: {
     width: 320,
-  },
-  label: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 15,
   },
 };
 
@@ -55,25 +51,27 @@ export default function LoginView() {
         <h2>Login</h2>
 
         <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-          <label style={styles.label}>
-            Email
-            <input
+          <Form.Group size="sm" className="mb-3">
+            {" "}
+            <Form.Label>Email </Form.Label>
+            <Form.Control
               type="email"
               name="email"
               value={email}
               onChange={handleChange}
             />
-          </label>
+          </Form.Group>
 
-          <label style={styles.label}>
-            Password
-            <input
+          <Form.Group size="sm" className="mb-3">
+            {" "}
+            <Form.Label>Password</Form.Label>
+            <Form.Control
               type="password"
               name="password"
               value={password}
               onChange={handleChange}
             />
-          </label>
+          </Form.Group>
 
           <button type="submit">Log in</button>
         </form>
