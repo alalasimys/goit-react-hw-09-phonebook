@@ -1,4 +1,5 @@
-import { connect } from "react-redux";
+import { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { getUserName, logOut } from "../../redux/auth";
 
 const styles = {
@@ -12,21 +13,18 @@ const styles = {
   },
 };
 
-const UserMenu = ({ name, onLogout }) => (
-  <div style={styles.container}>
-    <span style={styles.name}>Welcome, {name}</span>
-    <button type="button" onClick={onLogout}>
-      Logout
-    </button>
-  </div>
-);
+export default function UserMenu() {
+  const dispatch = useDispatch();
 
-const mapStateToProps = (state) => ({
-  name: getUserName(state),
-});
+  const userName = useSelector(getUserName);
+  const onLogout = useCallback(() => dispatch(logOut()), [dispatch]);
 
-const mapDispatchToProps = {
-  onLogout: logOut,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+  return (
+    <div style={styles.container}>
+      <span style={styles.name}>Welcome, {userName}</span>
+      <button type="button" onClick={onLogout}>
+        Logout
+      </button>
+    </div>
+  );
+}

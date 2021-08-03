@@ -1,85 +1,82 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
+import { useState, useCallback } from "react";
 import styles from "./ContactForm.module.css";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addContact, phonebookSelectors } from "../../redux/phonebook";
 import Form from "react-bootstrap/Form";
 import "./ContactForm.scss";
 
-class ContactForm extends Component {
-  state = {
-    name: "",
-    number: "",
-  };
+export default function ContactForm() {
+  const dispatch = useDispatch();
 
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    currentContacts: PropTypes.array.isRequired,
-  };
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
 
-  handleChange = (e) => {
-    this.setState({
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
+  const currentContacts = useSelector(phonebookSelectors.getAllContacts);
+  const onSubmit = useCallback(
+    (name, number) => dispatch(addContact(name, number)),
+    [dispatch]
+  );
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.currentTarget;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "number":
+        setNumber(value);
+        break;
+      default:
+        console.log(`Field with name -  ${name} not found`);
+    }
+  }, []);
 
-    const { name, number } = this.state;
-    const { currentContacts, onSubmit } = this.props;
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    currentContacts.some(
-      (contact) => name.toLowerCase() === contact.name.toLowerCase()
-    )
-      ? alert(`${name} is already in contacts.`)
-      : onSubmit(name, number);
+      currentContacts.some(
+        (contact) => name.toLowerCase() === contact.name.toLowerCase()
+      )
+        ? alert(`${name} is already in contacts.`)
+        : onSubmit(name, number);
 
-    this.setState({ name: "", number: "" });
-  };
+      setName("");
+      setNumber("");
+    },
+    [currentContacts, name, number, onSubmit]
+  );
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} className={styles.FormContainer}>
-        <Form.Group size="sm" className="mb-3">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            className={styles.inputValue}
-            value={this.state.name}
-            onChange={this.handleChange}
-            placeholder="Enter name"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-          />
-        </Form.Group>
-        <Form.Group size="sm" className="mb-3">
-          <Form.Label className={styles.inputLabel}>Number</Form.Label>
-          <Form.Control
-            className={styles.inputValue}
-            value={this.state.number}
-            onChange={this.handleChange}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            required
-          />
-        </Form.Group>
-        <button type="submit">Add contact</button>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit} className={styles.FormContainer}>
+      <Form.Group size="sm" className="mb-3">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          type="text"
+          className={styles.inputValue}
+          value={name}
+          onChange={handleChange}
+          placeholder="Enter name"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          required
+        />
+      </Form.Group>
+      <Form.Group size="sm" className="mb-3">
+        <Form.Label className={styles.inputLabel}>Number</Form.Label>
+        <Form.Control
+          className={styles.inputValue}
+          value={number}
+          onChange={handleChange}
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+          required
+        />
+      </Form.Group>
+      <button type="submit">Add contact</button>
+    </form>
+  );
 }
-
-const mapStateToProps = (state) => ({
-  currentContacts: phonebookSelectors.getAllContacts(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (name, number) => dispatch(addContact(name, number)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

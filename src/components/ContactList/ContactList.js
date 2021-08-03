@@ -1,7 +1,15 @@
 import styles from "./ContactList.module.css";
 import ListGroup from "react-bootstrap/ListGroup";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact } from "../../redux/phonebook/phonebook-operations";
+import { phonebookSelectors } from "../../redux/phonebook";
 
-export const ContactList = ({ contacts, onDeleteContact }) => {
+export default function ContactList() {
+  const dispatch = useDispatch();
+
+  const contacts = useSelector(phonebookSelectors.getCurrentContacts);
+  const onDeleteContact = (id) => dispatch(deleteContact(id));
+
   return (
     <ListGroup>
       {contacts.map(({ id, name, number }) => (
@@ -20,4 +28,4 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
       ))}
     </ListGroup>
   );
-};
+}
