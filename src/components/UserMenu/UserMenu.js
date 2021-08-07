@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserName, logOut } from "../../redux/auth";
+import "./UserMenu.scss";
 
 const styles = {
   container: {
